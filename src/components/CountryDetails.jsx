@@ -15,30 +15,6 @@ function CountryDetails() {
     return <h1>Country not found</h1>;
   }
 
-  // const borders = country.borders || [];
-  // // const countryBorders = borders.map((borderCode) => {
-  // //   const borderCountry = countries.find((c) => c.cca3 === borderCode);
-  // //   return borderCountry ? borderCountry.name.common : "Unknown";
-  // // });
-
-  //   const country = countries.find((c) => {
-  //     return c.cca3 === countryCode;
-  //   });
-
-  //   const borders = country.borders ? country.borders : [];
-
-  //   const countryBorders = [];
-
-  //   const borders2 = [];
-
-  //   for (let i of countries) {
-  //     if (borders.length > 0 && borders.includes(i.cca3)) {
-  //       countryBorders.push(i.name);
-  //       borders2.push(i.cca3);
-  //     }
-  //   }
-  //   console.log(borders2, countryBorders);
-
   const data = [
     {
       detailName: "🌐 Native Name:",
@@ -62,7 +38,7 @@ function CountryDetails() {
       detailName: "💰 Currencies:",
       detailInfo: country.currencies
         ? Object.values(country.currencies)
-            .map((currency) => `${currency.name}`)
+            .map((currency) => `${currency.name} (${currency.symbol})`)
             .join(", ")
         : "Not available",
     },

@@ -20,6 +20,7 @@ function SearchAndFilter() {
       aria-label="search-and-filter"
       className="z-10 flex w-full flex-col justify-start gap-y-10 px-8 py-10 md:flex-row md:justify-between md:p-16"
     >
+      {/*Search*/}
       <div>
         <div className="relative z-10">
           <div className="pointer-events-none absolute inset-y-0 left-0 mr-10 flex items-center pl-5">
@@ -49,6 +50,7 @@ function SearchAndFilter() {
         </div>
       </div>
 
+      {/*Sort*/}
       <div className="flex justify-between gap-x-10">
         <select
           id="countries"
@@ -56,14 +58,17 @@ function SearchAndFilter() {
           onChange={(e) => setSort(e.target.value)}
           className="text-md block w-8/12 cursor-pointer rounded-lg bg-gray-50 p-4 text-gray-900 shadow-md focus:outline-none md:w-[250px]"
         >
-          <option value="">Sort by...</option>
+          <option value="Sort by" disabled>
+            Sort by...
+          </option>
           <option value="population">Population</option>
           <option value="name">Name (A-Z)</option>
-          <option value="area">Area</option>
+          {/* <option value="area">Area</option>
           <option value="density">Population Density</option>
-          <option value="neighbors">Number of Neighbors</option>
+          <option value="neighbors">Number of Neighbors</option> */}
         </select>
 
+        {/*Select regions*/}
         <select
           id="countries"
           value={selectedValue}

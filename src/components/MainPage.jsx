@@ -3,7 +3,7 @@ import CountriesCard from "./CountriesCard";
 import NotFound from "./NotFound";
 
 function MainPage() {
-  const { countries, search, selectedValue } = useCountries();
+  const { countries, search, selectedValue, sort } = useCountries();
 
   function list(arr) {
     return arr.map((country, index) => {
@@ -35,14 +35,21 @@ function MainPage() {
 
   const searchedCountries =
     search.length > 2
-      ? countries
-          .filter((country) =>
-            country.name.common.toLowerCase().includes(search.toLowerCase())
-          )
-          .sort((a, b) => a.name.common.localeCompare(b.name.common))
-      : countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+      ? countries.filter((country) =>
+          country.name.common.toLowerCase().includes(search.toLowerCase())
+        )
+      : countries;
 
-  const filteredCountries = filterCountries(searchedCountries);
+  const sortedByPopAndName =
+    sort === "population"
+      ? [...searchedCountries].sort((a, b) => b.population - a.population)
+      : sort === "name"
+      ? [...searchedCountries].sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        )
+      : searchedCountries;
+
+  const filteredCountries = filterCountries(sortedByPopAndName);
 
   const totalResults = filteredCountries.length;
 
@@ -68,7 +75,7 @@ function MainPage() {
 
       {totalResults > 0 ? (
         <ul className="z-10 grid gap-x-10 gap-y-16 p-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {list(filterCountries(searchedCountries))}
+          {list(filteredCountries)}
         </ul>
       ) : (
         <NotFound />
